@@ -48,5 +48,5 @@ def get_valids(L, H, board):
                     if slc.size < H and min(nr_T, nr_M) > L:
                         valids.append([c_1, c_2, r_1, r_2])
     return valids
-print(generate(123, 5, 5, 3, 6));
-print(parse('test.txt'))
+# print(generate(123, 5, 5, 3, 6));
+# print(parse('test.txt'))

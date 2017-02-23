@@ -1,0 +1,17 @@
+﻿		public static void Compare()
+		{
+			var rnd = new Random(1337);
+			for (var t = 0; t < 100000; t++)
+			{
+				var len = rnd.Next(3, 8);
+				var str = RandomGenerator.RandomString(rnd, "ABCDE", len);
+				var brute = SolveBrute(str);
+				var actual = Solve(str);
+
+				if (actual != brute)
+				{
+					Console.WriteLine(new { t, brute, actual });
+					throw new InvalidOperationException();
+				}
+			}
+		}

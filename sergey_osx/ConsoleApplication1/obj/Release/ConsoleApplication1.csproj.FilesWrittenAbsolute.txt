@@ -1,0 +1,6 @@
+/Users/ejm/projects/gready_fram/sergey/ConsoleApplication1/obj/Release/.NETFramework,Version=v4.5.2.AssemblyAttribute.cs
+/Users/ejm/projects/gready_fram/sergey/ConsoleApplication1/bin/Release/ConsoleApplication1.exe.config
+/Users/ejm/projects/gready_fram/sergey/ConsoleApplication1/bin/Release/ConsoleApplication1.exe.mdb
+/Users/ejm/projects/gready_fram/sergey/ConsoleApplication1/bin/Release/ConsoleApplication1.exe
+/Users/ejm/projects/gready_fram/sergey/ConsoleApplication1/obj/Release/ConsoleApplication1.exe
+/Users/ejm/projects/gready_fram/sergey/ConsoleApplication1/obj/Release/ConsoleApplication1.exe.mdb

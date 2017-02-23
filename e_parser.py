@@ -1,5 +1,7 @@
 from __future__ import (print_function, division, unicode_literals, absolute_import)
 
+import numpy as np
+
 
 def parser(file_name):
     with open(file_name) as f:
@@ -19,21 +21,20 @@ def parser(file_name):
             for i_conn in range(nr_conns):
                 cache_id, conn_delay = [int(s) for s in f.readline().split()]
                 conns.append({'cache_id': cache_id, 'delay': conn_delay})
+            conns.sort(key=lambda c: c['delay'])
             end = {'ds_delay': ds_delay, 'conns': conns}
             ends.append(end)
 
         reqs = []
         for i_req in range(nr_reqs):
-            vid_id, end_id, nr_reqs = [int(s) for s in f.readline().split()]
-            reqs.append({'vid_id': vid_id, 'end_id': end_id, 'weight': nr_reqs})
+            vid_id, end_id, weight = [int(s) for s in f.readline().split()]
+            reqs.append({'vid_id': vid_id, 'end_id': end_id, 'weight': weight})
+        vid_ids = set(r['vid_id'] for r in reqs)
+        assert len(ends) == nr_ends
+        assert len(reqs) == nr_reqs
+        assert max(vid_ids) < nr_vids
 
     return nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs
-
-
-fname = 'dat/me_at_the_zoo.in'
-nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs = parser(fname)
-
-reqs_sort = reversed(sorted(reqs, key=lambda r: r['weight']))
 
 
 def cache_used(cache):
@@ -44,34 +45,41 @@ def cache_vid_ids(cache):
     return [v[0] for v in cache]
 
 
-total_weight = sum(req['weight'] for req in reqs)
-nr_fails = 0
-nr_fails_max = 100
 
-caches = [[] for _ in range(nr_caches)]
-for i_req, req in enumerate(reqs_sort):
-    print('on request ', i_req, ' of ', len(reqs))
-    end_id = req['end_id']
-    vid_id = req['vid_id']
-    vid_size = vid_sizes[vid_id]
-    end = ends[end_id]
-    conns = end['conns']
-    conns_short = sorted(conns, key=lambda c: c['delay'])
-    for conn in conns_short:
-        cache_id = conn['cache_id']
-        cache = caches[cache_id]
-        cache_free = cache_size - cache_used(cache)
-        if vid_id not in cache_vid_ids(cache) and cache_free > vid_size:
-            cache.append((vid_id, vid_size))
-            break
-    else:
-        nr_fails += 1
-        print('couldnt cache requests vid nooo')
-        if nr_fails > nr_fails_max:
-            break
+def solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs,
+          randomize=False, seed=1):
+    reqs_sort = reversed(sorted(reqs, key=lambda r: r['weight']))
 
-for c in caches:
-    print('size: ', cache_used(c))
+    rng = np.random.RandomState(seed=seed)
+
+    total_weight = sum(req['weight'] for req in reqs)
+    nr_fails = 0
+    nr_fails_max = 100
+
+    caches = [[] for _ in range(nr_caches)]
+    for i_req, req in enumerate(reqs_sort):
+        # print('on request ', i_req, ' of ', len(reqs))
+        end_id = req['end_id']
+        vid_id = req['vid_id']
+        vid_size = vid_sizes[vid_id]
+        end = ends[end_id]
+        conns = end['conns']
+        if randomize:
+            rng.shuffle(conns)
+        for conn in conns:
+            cache_id = conn['cache_id']
+            cache = caches[cache_id]
+            cache_free = cache_size - cache_used(cache)
+            if vid_id not in cache_vid_ids(cache) and cache_free > vid_size:
+                cache.append((vid_id, vid_size))
+                break
+        else:
+            nr_fails += 1
+            # print('couldnt cache requests vid nooo')
+            if nr_fails > nr_fails_max:
+                break
+    return caches
+
 
 def write_soln(caches, file_name):
     with open(file_name, 'w') as f:
@@ -84,5 +92,67 @@ def write_soln(caches, file_name):
             f.write(s + '\n')
 
 
-write_soln(caches, fname[:-3] + '.out')
+def score_soln(caches):
+    saved_delays = []
+    end_hits = {}
+    end_reqs = {}
+    for req in reqs:
+        end_id = req['end_id']
+        end = ends[end_id]
+        vid_id = req['vid_id']
+        ds_delay = end['ds_delay']
+        min_delay = ds_delay
+        conns = end['conns']
+        hit = False
+        for conn in conns:
+            cache_id = conn['cache_id']
+            cache = caches[cache_id]
+            if vid_id in cache_vid_ids(cache):
+                hit = True
+                cache_delay = conn['delay']
+                min_delay = min(cache_delay, min_delay)
 
+        if hit:
+            if end_id not in end_hits:
+                end_hits[end_id] = 0
+            end_hits[end_id] += 1
+        if end_id not in end_reqs:
+            end_reqs[end_id] = 0
+        end_reqs[end_id] += 1
+
+        saved_delay = ds_delay - min_delay
+        saved_delays.append(saved_delay)
+    mean_saved_delay = (1000 * sum(saved_delays)) / float(len(saved_delays))
+    return mean_saved_delay, end_hits, end_reqs
+
+
+fname = 'dat/me_at_the_zoo.in'
+nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs = parser(fname)
+
+caches = solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs, randomize=False, seed=1)
+
+# score_max = 0
+# seed_max = -1
+# caches_best = None
+# for seed in range(100):
+#     caches = solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs, seed=seed)
+#     score = score_soln(caches)
+#     if score > score_max:
+#         score_max = score
+#         seed_max = seed
+#         caches_best = caches
+#     print(seed, score)
+
+# write_soln(caches_best, fname[:-3] + '.out')
+
+# print()
+# print(seed_max, score_max)
+for c in caches:
+    print('size: ', cache_used(c))
+s, h, r = score_soln(caches)
+
+for end_id in h:
+    hit_rate = h[end_id] / r[end_id]
+    print(end_id, hit_rate)
+print(h)
+print(r)

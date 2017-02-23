@@ -52,9 +52,11 @@ def solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs,
 
     rng = np.random.RandomState(seed=seed)
 
+    mean_vid_size = sum(vid_sizes) / float(len(vid_sizes))
+
     total_weight = sum(req['weight'] for req in reqs)
     nr_fails = 0
-    nr_fails_max = 100
+    nr_fails_max = 200
 
     caches = [[] for _ in range(nr_caches)]
     for i_req, req in enumerate(reqs_sort):
@@ -73,6 +75,12 @@ def solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs,
             if vid_id not in cache_vid_ids(cache) and cache_free > vid_size:
                 cache.append((vid_id, vid_size))
                 break
+                # if vid_size < mean_vid_size:
+                #     cache.append((vid_id, vid_size))
+                #     break
+                # elif rng.rand() < 0.8:
+                #     cache.append((vid_id, vid_size))
+                #     break                    
         else:
             nr_fails += 1
             # print('couldnt cache requests vid nooo')
@@ -96,12 +104,17 @@ def score_soln(caches):
     saved_delays = []
     end_hits = {}
     end_reqs = {}
+    total_weight = 0
     for req in reqs:
         end_id = req['end_id']
         end = ends[end_id]
         vid_id = req['vid_id']
         ds_delay = end['ds_delay']
         min_delay = ds_delay
+        weight = req['weight']
+
+        total_weight += weight
+
         conns = end['conns']
         hit = False
         for conn in conns:
@@ -120,39 +133,44 @@ def score_soln(caches):
             end_reqs[end_id] = 0
         end_reqs[end_id] += 1
 
-        saved_delay = ds_delay - min_delay
+        saved_delay = weight * (ds_delay - min_delay)
         saved_delays.append(saved_delay)
-    mean_saved_delay = (1000 * sum(saved_delays)) / float(len(saved_delays))
+    mean_saved_delay = (1000 * sum(saved_delays)) / total_weight
     return mean_saved_delay, end_hits, end_reqs
 
 
 fname = 'dat/me_at_the_zoo.in'
+fname = 'dat/kittens.in'
 nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs = parser(fname)
 
-caches = solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs, randomize=False, seed=1)
+caches = solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs, randomize=False)
 
 # score_max = 0
 # seed_max = -1
 # caches_best = None
-# for seed in range(100):
-#     caches = solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs, seed=seed)
+# for seed in range(1):
+#     caches = solve(nr_vids, nr_caches, cache_size, vid_sizes, ends, reqs,
+#                    randomize=True, seed=seed)
 #     score = score_soln(caches)
 #     if score > score_max:
 #         score_max = score
 #         seed_max = seed
 #         caches_best = caches
-#     print(seed, score)
+#     # print(seed, score)
 
+# print(seed_max, score_max)
 # write_soln(caches_best, fname[:-3] + '.out')
 
 # print()
 # print(seed_max, score_max)
-for c in caches:
-    print('size: ', cache_used(c))
-s, h, r = score_soln(caches)
+# for c in caches:
+#     print('size: ', cache_used(c))
+# s, h, r = score_soln(caches)
 
-for end_id in h:
-    hit_rate = h[end_id] / r[end_id]
-    print(end_id, hit_rate)
-print(h)
-print(r)
+
+# print(s)
+# for end_id in h:
+#     hit_rate = h[end_id] / r[end_id]
+#     print(end_id, hit_rate)
+# print(h)
+# print(r)

@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1FC16FEC-4B05-40B6-94E7-4560D8E859C8}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConsoleApplication1</RootNamespace>
+    <AssemblyName>ConsoleApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Combinatorics, Version=1.0.3.0, Culture=neutral, PublicKeyToken=d5738f21cd5d2f66, processorArchitecture=MSIL">
+      <HintPath>..\packages\Combinatorics.1.0.3.2\lib\net40\Combinatorics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataTypes\ArrayKeyDictionary.cs" />
+    <Compile Include="DataTypes\BinaryHeap.cs" />
+    <Compile Include="DataTypes\BinaryIndexedTree.cs" />
+    <Compile Include="DataTypes\BitArrayMy.cs" />
+    <Compile Include="DataTypes\BloomFilter.cs" />
+    <Compile Include="DataTypes\CountDictionary.cs" />
+    <Compile Include="DataTypes\PalindromicTree.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank34.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank35.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank36.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank37.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank38.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank39.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank40.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank41.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank42.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank43.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank44.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank45.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank46.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank47.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank48.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank49.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank50.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank51.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank52.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank53.cs" />
+    <Compile Include="HackerRank\HackerRank54.cs" />
+    <Compile Include="HackerRank\HackerRank55.cs" />
+    <Compile Include="HackerRank\HackerRank56.cs" />
+    <Compile Include="HackerRank\HackerRank57.cs" />
+    <Compile Include="HackerRank\HackerRank58.cs" />
+    <Compile Include="HackerRank\HackerRank59.cs" />
+    <Compile Include="HackerRank\HackerRank60.cs" />
+    <Compile Include="HackerRank\HackerRank61.cs" />
+    <Compile Include="HackerRank\HackerRank61_Uwi.cs" />
+    <Compile Include="HackerRank\HackerRank62.cs" />
+    <Compile Include="HackerRank\HackerRank63.cs" />
+    <Compile Include="HackerRank\HackerRank64.cs" />
+    <Compile Include="Helpers\BigIntegerHelper.cs" />
+    <Compile Include="Helpers\BitHelper.cs" />
+    <Compile Include="Helpers\CombinatoricsHelper.cs" />
+    <Compile Include="Helpers\JsonSerializer.cs" />
+    <Compile Include="Helpers\ShortestPathHelper.cs" />
+    <Compile Include="DataTypes\DoubleKeyDictionary.cs" />
+    <Compile Include="DataTypes\DoubleSidesDictionary.cs" />
+    <Compile Include="DataTypes\LeftLeaningRedBlackTree_WithEvents.cs" />
+    <Compile Include="DataTypes\Pair.cs" />
+    <Compile Include="DataTypes\Pairs.cs" />
+    <Compile Include="DataTypes\RandomElementChooser.cs" />
+    <Compile Include="DataTypes\LeftLeaningRedBlackTree.cs" />
+    <Compile Include="DataTypes\Stat.cs" />
+    <Compile Include="DataTypes\UnionFind.cs" />
+    <Compile Include="DataTypes\WeightedSet.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank1.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank10.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank11.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank12.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank13.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank14.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank15.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank16.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank17.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank18.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank19.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank2.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank20.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank21.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank22.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank23.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank24.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank25.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank26.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank27.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank28.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank29.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank3.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank30.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank31.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank32.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank33.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank4.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank5.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank6.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank7.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank8.cs" />
+    <Compile Include="HackerRank\Archive\HackerRank9.cs" />
+    <Compile Include="Helpers\ArrayHelper.cs" />
+    <Compile Include="Helpers\BoyerMooreStringSearch.cs" />
+    <Compile Include="Helpers\BinarySearchHelper.cs" />
+    <Compile Include="Helpers\DelegateEqualityComparer.cs" />
+    <Compile Include="Helpers\DictionaryHelper.cs" />
+    <Compile Include="Helpers\EmptyHolder.cs" />
+    <Compile Include="Helpers\EnumerableHelper.cs" />
+    <Compile Include="Helpers\GameTheoryHelper.cs" />
+    <Compile Include="Helpers\GraphHelper.cs" />
+    <Compile Include="Helpers\HR.cs" />
+    <Compile Include="DataTypes\PointInt.cs" />
+    <Compile Include="Helpers\MillerRabinPrimality.cs" />
+    <Compile Include="Helpers\MyMath.cs" />
+    <Compile Include="Helpers\PointIntHelper.cs" />
+    <Compile Include="Helpers\RandomGenerator.cs" />
+    <Compile Include="Helpers\RandomHelper.cs" />
+    <Compile Include="DataTypes\Statistics.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Helpers\TimeMeasureHelper.cs" />
+    <Compile Include="KaggleBimbo\Bimbo.cs" />
+    <Compile Include="OtherTasks\CourseraDoColoring.cs" />
+    <Compile Include="OtherTasks\Hashcode2017\Hashcode2017.cs" />
+    <Compile Include="OtherTasks\Hashcode2017\Problem.cs" />
+    <Compile Include="OtherTasks\Hashcode2017\Solution.cs" />
+    <Compile Include="OtherTasks\HashCodePizza.cs" />
+    <Compile Include="OtherTasks\YuraMs.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Notes.txt" />
+    <Content Include="Prefabs\Compare.txt" />
+    <Content Include="Prefabs\SubmissionPrefab_Tests.txt" />
+    <Content Include="Prefabs\SubmissionPrefab.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

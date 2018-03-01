@@ -20,7 +20,7 @@ def optimal_ontime_rides(rides, B):
 	# (start, end, (min_start_time, max_end_time), dist)
 	rides.sort(key=lambda x: x[2][0])
 
-	rides = [((0, 0), (0, 0), (0, 0), 0)] + rides
+	rides = [((0, 0), (0, 0), (0, 0), 0, -1)] + rides
 
 	parent_rides = {}
 	for i in range(1, len(rides)):

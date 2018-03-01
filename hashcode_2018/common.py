@@ -8,13 +8,13 @@ def read_file(filename):
         header = next(fin)
         R, C, F, N, B, T = map(int, header.split())
         rides = []
-        for _ in range(N):
+        for i in range(N):
             a, b, x, y, s, f = map(int, next(fin).split())
             start = (a, b)
             end = (x, y)
             time = (s, f)
             ride_dist = dist(start, end)
-            rides.append((start, end, time, ride_dist))
+            rides.append((start, end, time, ride_dist, i))
         return {
             'R': R,
             'C': C,

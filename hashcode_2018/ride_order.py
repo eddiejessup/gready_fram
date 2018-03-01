@@ -32,10 +32,11 @@ def optimal_ontime_rides(rides, B):
 		optimal_ride_score = None
 		optimal_parent = None
 		for parent in parent_rides[ride]:
-			candidate_ride_score = optimal_scores[parent][0] + B + ride[3]
-			if candidate_ride_score > optimal_ride_score:
-				optimal_ride_score = candidate_ride_score
-				optimal_parent = parent
+			if optimal_scores[parent][0] is not None:
+				candidate_ride_score = optimal_scores[parent][0] + B + ride[3]
+				if candidate_ride_score > optimal_ride_score:
+					optimal_ride_score = candidate_ride_score
+					optimal_parent = parent
 		optimal_scores[ride] = (optimal_ride_score, optimal_parent)
 
 	# Reconstructing optimal path
@@ -57,7 +58,7 @@ def optimal_ontime_rides(rides, B):
 	return optimal_path, final_score
 
 if __name__ == '__main__':
-    task = read_file('../dat/a_example.in')
+    task = read_file('../dat/b_should_be_easy.in')
     rides = task["rides"]
     B = task["B"]
     print(task)

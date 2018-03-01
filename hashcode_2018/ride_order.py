@@ -40,6 +40,7 @@ def optimal_ontime_rides(rides, B):
 
 	# Reconstructing optimal path
 	optimal_end = max(optimal_scores, key=lambda x: optimal_scores[x][0])
+	final_score = optimal_scores[optimal_end][0]
 
 	optimal_path = [optimal_end]
 	next_step = optimal_scores[optimal_path[-1]][1]
@@ -53,7 +54,7 @@ def optimal_ontime_rides(rides, B):
 	for ride in rides[1:]:
 		if ride not in optimal_path:
 			optimal_path.append(ride)
-	return optimal_path
+	return optimal_path, final_score
 
 if __name__ == '__main__':
     task = read_file('../dat/a_example.in')

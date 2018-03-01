@@ -37,7 +37,7 @@ def astar(task, start, n_iterations, branch_factor, n_frontier):
     start_sorted, start_score = get_score_and_sort(task, start)
 
     frontier = PriorityQueue()
-    frontier.put(start_sorted, start_score)
+    frontier.put(start_sorted, -start_score)
 
     for iter in xrange(n_iterations):
         current_score, current = frontier.get()
@@ -45,9 +45,7 @@ def astar(task, start, n_iterations, branch_factor, n_frontier):
         cnt = 0
         for candidate in get_neighbors(task, current):
             candidate_sorted, candidate_cost = get_score_and_sort(task, candidate)
-            frontier.put(candidate_sorted, candidate_cost)
-
-            print(candidate_cost, candidate_sorted)
+            frontier.put(candidate_sorted, -candidate_cost)
 
             cnt += 1
             if cnt == branch_factor:
@@ -118,7 +116,7 @@ if __name__ == '__main__':
     score, sol = astar(
         task,
         start,
-        n_iterations = 2,
+        n_iterations = 1000,
         branch_factor = 3,
         n_frontier = 10)
 

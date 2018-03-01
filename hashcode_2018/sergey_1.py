@@ -1,0 +1,3 @@
+import heapq
+
+print('hi')

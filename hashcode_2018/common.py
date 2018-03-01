@@ -35,7 +35,7 @@ def calc_score(task, solution):
         car = (0, 0)
         t = 0
         for ride in car_rides:
-            start, end, time, ride_dist = rides[ride]
+            start, end, time, ride_dist, ride_i = rides[ride]
 
             car_to_start = dist(car, start)
 
@@ -48,8 +48,6 @@ def calc_score(task, solution):
 
             t = max(t + car_to_start, time[0]) + ride_dist
             car = end
-
-            print(car, t, score)
 
     return score
 
